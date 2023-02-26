@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import Words, Topics, Levels
 
-# Register your models here.
+admin.site.register(Words)
+admin.site.register(Topics)
+admin.site.register(Levels)
