@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>level</title>
+</head>
+<body>
+    {% for object in object_list %}
+    <h1><a href="{% url 'topic' my_arg=object.id %}">{{ object }}</a></h1>
+    {% endfor %}
+</body>
+</html>
