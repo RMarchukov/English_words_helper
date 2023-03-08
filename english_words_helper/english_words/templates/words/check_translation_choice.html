@@ -1,0 +1,7 @@
+{% extends 'words/base.html' %}
+{% block content %}
+  <h1>{{ result }}</h1>
+  <p>Слово: {{ word.in_ukrainian }}</p>
+  <p>Переклад: {{ word.in_english }}</p>
+  <a href="{% url 'translate' my_arg='choice'%}">Наступне слово t</a>
+{% endblock content %}

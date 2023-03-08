@@ -1,0 +1,13 @@
+{% extends 'words/base.html' %}
+{% block content %}
+    <h1>Перекладіть слово "{{ word.in_english }}"</h1>
+    <form method="post" action="{% url 'check_translation' my_arg='eng-choice'%}">
+    {% csrf_token %}
+    <input type="hidden" name="word_id" value="{{ word.id }}">
+    <label><input type="radio" name="one" value="{{ one.in_ukrainian }}">1{{ one.in_ukrainian }}</label>
+    <label><input type="radio" name="two" value="{{ two.in_ukrainian }}">2{{ one.in_ukrainian }}</label>
+    <label><input type="radio" name="three" value="{{ word.in_ukrainian }}">3{{ word.in_ukrainian }}</label>
+    <label><input type="radio" name="four" value="{{ four.in_ukrainian }}">4{{ four.in_ukrainian }}</label>
+    <input type="submit" value="Перевірити">
+    </form>
+{% endblock content %}

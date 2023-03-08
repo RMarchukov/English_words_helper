@@ -1,0 +1,10 @@
+{% extends 'words/base.html' %}
+{% block content %}
+    <h1>Перекладіть слово "{{ word.in_english }}"</h1>
+    <form method="post" action="{% url 'check_translation' my_arg='eng-test'%}">
+    {% csrf_token %}
+    <input type="hidden" name="word_id" value="{{ word.id }}">
+    <input type="text" name="translation">
+    <input type="submit" value="Перевірити">
+    </form>
+{% endblock content %}

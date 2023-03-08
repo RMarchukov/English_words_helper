@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>topic</title>
-</head>
-<body>
+{% extends 'words/base.html' %}
+{% block content %}
     {% for object in object_list %}
     <h1><a href="{% url 'word' my_arg=object.id %}">{{ object }}</a></h1>
     {% endfor %}
     <a href="{% url 'level' %}">go back</a>
-</body>
-</html>
+{% endblock content %}

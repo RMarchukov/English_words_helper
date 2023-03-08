@@ -23,3 +23,13 @@ class Words(models.Model):
 
     def __str__(self):
         return f'{self.in_english}, {self.in_ukrainian}, {self.topic}'
+
+
+class IrregularVerbs(models.Model):
+    first_form = models.CharField(max_length=64)
+    second_form = models.CharField(max_length=64)
+    third_form = models.CharField(max_length=64)
+    translate = models.CharField(max_length=64)
+
+    def __str__(self):
+        return f'{self.first_form}, {self.second_form}, {self.third_form}, {self.translate}'
