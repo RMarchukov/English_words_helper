@@ -5,6 +5,13 @@
     <title>Words</title>
 </head>
 <body>
+  <nav>
+    {% if user.is_authenticated %}
+      <p>Welcome, {{ user.username }}! <a href="{% url 'logout' %}">Logout</a></p>
+    {% else %}
+      <p><a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Register</a></p>
+    {% endif %}
+  </nav>
     {% block heading %}
 
     {% endblock heading %}
