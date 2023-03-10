@@ -1,0 +1,6 @@
+{% extends 'words/base.html' %}
+{% block content %}
+  {% for test in types %}
+  <a href="{% url 'translate' my_arg=test %}">{{ test }}</a>
+  {% endfor %}
+{% endblock content %}

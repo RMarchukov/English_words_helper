@@ -1,0 +1,6 @@
+{% extends 'words/base.html' %}
+{% block content %}
+  <h1>Всього спроб: {{ user_tests.all_test }}</h1>
+  <h1>Правильних відповідей: {{ user_tests.true_test }}</h1>
+  <h1>Неправильних відповідей: {{ user_tests.false_test }}</h1>
+{% endblock content %}

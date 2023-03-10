@@ -1,7 +1,8 @@
 {% extends 'words/base.html' %}
 {% block content %}
+    <h1>Теми рівня</h1>
     {% for object in object_list %}
-    <h1><a href="{% url 'word' my_arg=object.id %}">{{ object }}</a></h1>
+    <h1><a href="{% url 'word' my_arg=object.id %}">{{ object.name }}</a></h1>
     {% endfor %}
     <a href="{% url 'level' %}">go back</a>
 {% endblock content %}

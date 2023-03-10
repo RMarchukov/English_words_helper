@@ -1,0 +1,6 @@
+{% extends 'words/base.html' %}
+{% block content %}
+  {% for word in user_words %}
+  <h1>{{ word }}</h1>
+  {% endfor %}
+{% endblock content %}
