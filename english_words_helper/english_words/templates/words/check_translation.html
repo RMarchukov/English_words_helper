@@ -4,6 +4,6 @@
   <p>Слово: {{ word.in_ukrainian }}</p>
   <p>Переклад: {{ word.in_english }}</p>
   <p>Ваша відповідь: {{ translation }}</p>
-  <a href="{% url 'translate' my_arg='test'%}">Наступне слово</a>
-  <a href="{% url 'types' %}">Назад до тестів</a>
+  <p><a href="{% url 'translate' my_arg='test'%}">Наступне слово</a></p>
+  <p><a href="{% url 'types' %}">Назад до тестів</a></p>
 {% endblock content %}

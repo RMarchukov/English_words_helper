@@ -4,5 +4,5 @@
     {% for object in object_list %}
     <h1><a href="{% url 'word' my_arg=object.id %}">{{ object.name }}</a></h1>
     {% endfor %}
-    <a href="{% url 'level' %}">go back</a>
+    <a href="{% url 'level' %}">Повернутися до рівнів</a>
 {% endblock content %}

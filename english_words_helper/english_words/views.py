@@ -116,7 +116,7 @@ class CheckTranslationView(View):
 class AddWord(LoginRequiredMixin, FormView):
     template_name = 'words/add_word.html'
     form_class = UserWordsForm
-    success_url = reverse_lazy('level')
+    success_url = reverse_lazy('show_words')
     login_url = reverse_lazy('login')
 
     def form_valid(self, form):

@@ -1,10 +1,10 @@
 {% extends 'words/base.html' %}
 {% block content %}
-  <a href="{% url 'level' %}">See</a>
-  <a href="{% url 'types' %}">Translate</a>
+  <p><a href="{% url 'level' %}">Подивитися рівні</a></p>
+  <p><a href="{% url 'types' %}">Перейти до тестів</a></p>
   {% if user.is_authenticated %}
-  <a href="{% url 'add_word' %}">Add word</a>
-  <a href="{% url 'show_words' %}">See your words</a>
-  <a href="{% url 'show_tests' %}">See tests</a>
+  <p><a href="{% url 'add_word' %}">Додати слово</a></p>
+  <p><a href="{% url 'show_words' %}">Подивитися свої слова</a></p>
+  <p><a href="{% url 'show_tests' %}">Подивитися результати тестів</a></p>
   {% endif %}
 {% endblock content %}

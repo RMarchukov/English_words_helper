@@ -3,24 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Words</title>
+    <style>
+      nav{
+        background-color: gray;
+        text-align: right;
+      }
+      nav.header a {
+        font-size: 25px;
+        text-decoration: none;
+      }
+      nav.header {
+        border: 5px solid #ccc;
+        padding: 10px;
+      }
+      a{
+        font-size: 20px;
+        color: black;
+      }
+  </style>
 </head>
 <body>
-  <nav>
-    {% if user.is_authenticated %}
-      <p>Welcome, {{ user.username }}! <a href="{% url 'logout' %}">Logout</a></p>
-    {% else %}
-      <p><a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Register</a></p>
-    {% endif %}
-  </nav>
-    {% block heading %}
-
-    {% endblock heading %}
-
-    {% block content %}
-
-    {% endblock content %}
-  <br>
-  <br>
-  <a href="{% url 'main' %}">Go to main page</a>
+  <div class="main">
+    <nav class="header">
+      {% if user.is_authenticated %}
+        <p>Welcome, {{ user.username }}! <a href="{% url 'logout' %}">Вийти</a></p>
+      {% else %}
+        <p><a href="{% url 'login' %}">Увійти</a> або <a href="{% url 'register' %}">Зареєструватися</a></p>
+      {% endif %}
+    </nav>
+    <div class="content">
+      {% block content %}
+      {% endblock content %}
+      <p><a href="{% url 'main' %}">Перейти на головну сторінку</a></p>
+    </div>
+  </div>
 </body>
 </html>
