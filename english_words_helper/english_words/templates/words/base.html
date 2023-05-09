@@ -2,39 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Words</title>
-    <style>
-      nav{
-        background-color: gray;
-        text-align: right;
-      }
-      nav.header a {
-        font-size: 25px;
-        text-decoration: none;
-      }
-      nav.header {
-        border: 5px solid #ccc;
-        padding: 10px;
-      }
-      a{
-        font-size: 20px;
-        color: black;
-      }
-  </style>
+    {% block link %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% endblock link %}
+    <meta name="viewport" content="width=device-width">
 </head>
+
+
 <body>
+  <div class="header">
+    {% if user.is_authenticated %}
+      <p>Welcome, {{ user.username }}! <a href="{% url 'logout' %}">Вийти</a></p>
+    {% else %}
+      <p><a href="{% url 'login' %}">Увійти</a> або <a href="{% url 'register' %}">Зареєструватися</a></p>
+    {% endif %}
+  </div>
   <div class="main">
-    <nav class="header">
-      {% if user.is_authenticated %}
-        <p>Welcome, {{ user.username }}! <a href="{% url 'logout' %}">Вийти</a></p>
-      {% else %}
-        <p><a href="{% url 'login' %}">Увійти</a> або <a href="{% url 'register' %}">Зареєструватися</a></p>
-      {% endif %}
-    </nav>
+   
     <div class="content">
       {% block content %}
+      <h1>Теми рівня</h1>
+      {% for object in levels %}
+      <h1><a href="{% url 'topic' my_arg=object.id %}">{{ object.name }}</a></h1>
+      {% endfor %}
       {% endblock content %}
-      <p><a href="{% url 'main' %}">Перейти на головну сторінку</a></p>
+    </div>
+
+    <div class="sidebar">
+        <a href="{% url 'types' %}">Перейти до тестів</a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'add_word' %}">Додати слово</a>
+        <a href="{% url 'show_words' %}">Подивитися свої слова</a>
+        <a href="{% url 'show_tests' %}">Подивитися результати тестів</a>
+        <a href="{% url 'base' %}">Перейти на головну сторінку</a>
+        {% endif %}
     </div>
   </div>
 </body>

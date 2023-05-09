@@ -1,6 +1,12 @@
 {% extends 'words/base.html' %}
+
 {% block content %}
-  {% for object in object_list %}
-  <p>{{ object.in_english }} - {{ object.in_ukrainian }}</p>
-  {% endfor %}
+  <div class="word-list">
+    {% for object in object_list %}
+      <div class="word">
+        <div class="word-english">{{ object.in_english }}</div>
+        <div class="word-ukrainian">{{ object.in_ukrainian }}</div>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock content %}

@@ -22,7 +22,7 @@ class RegisterView(FormView):
 
 class LoginView(FormView):
     template_name = 'users/login.html'
-    success_url = reverse_lazy('main')
+    success_url = reverse_lazy('base')
     form_class = LoginForm
 
     def form_valid(self, form):

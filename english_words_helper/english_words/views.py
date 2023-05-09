@@ -6,11 +6,21 @@ from django.views import View
 from .forms import UserWordsForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import JsonResponse
+from django.shortcuts import render
 
 
-class Level(ListView):
-    template_name = 'words/level.html'
-    queryset = Levels.objects.all()
+class BaseView(View):
+
+    def get(self, request):
+        queryset = Levels.objects.all()
+        context = {'levels': queryset}
+        return render(request, 'words/base.html', context)
+    
+
+# class Level(ListView):
+#     template_name = 'words/level.html'
+#     queryset = Levels.objects.all()
 
 
 class Topic(ListView):
@@ -53,15 +63,8 @@ class FromEnglish(View):
         three = choice(all_words)
         four = choice(all_words)
 
-        context = {'word': random_word, 'one': one, 'two': two, 'three': three, 'four': four}
-        if my_arg == 'test':
-            return render(request, 'words/test.html', context)
-        if my_arg == 'choice':
-            return render(request, 'words/choice.html', context)
-        if my_arg == 'eng-test':
-            return render(request, 'words/test_english.html', context)
-        if my_arg == 'eng-choice':
-            return render(request, 'words/choice_english.html', context)
+        context = {'word': random_word, 'one': one, 'two': two, 'three': three, 'four': four, 'test': my_arg}
+        return render(request, 'words/test.html', context)
 
 
 class CheckTranslationView(View):
@@ -101,16 +104,9 @@ class CheckTranslationView(View):
         if request.user.is_authenticated:
             user_tests.save()
 
-        context = {'result': result, 'word': word, 'translation': translation}
         my_arg = self.kwargs.get('my_arg', None)
-        if my_arg == 'test':
-            return render(request, 'words/check_translation.html', context)
-        if my_arg == 'choice':
-            return render(request, 'words/check_translation_choice.html', context)
-        if my_arg == 'eng-test':
-            return render(request, 'words/check_translation_english.html', context)
-        if my_arg == 'eng-choice':
-            return render(request, 'words/check_translation_choice_english.html', context)
+        context = {'result': result, 'word': word, 'translation': translation, 'answer': my_arg}
+        return render(request, 'words/check_translation.html', context)
 
 
 class AddWord(LoginRequiredMixin, FormView):
@@ -150,11 +146,7 @@ class ShowTests(LoginRequiredMixin, ListView):
         return user_test
 
 
-def main(request):
-    return render(request, 'words/main.html')
-
-
 def translate(request):
-    types = ['test', 'eng-test', 'choice', 'eng-choice']
-    context = {'types': types}
+    me = {'test': 'Тести з украхнської', 'eng-test': 'Тести з англійської', 'choice': 'Вибиір варіанту', 'eng-choice': 'Вибиір варіанту з англійської'}
+    context = {'types': me}
     return render(request, 'words/translate.html', context)

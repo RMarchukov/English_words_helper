@@ -1,6 +1,13 @@
 {% extends 'words/base.html' %}
+{% load static %}
 {% block content %}
-  {% for test in types %}
-  <p><a href="{% url 'translate' my_arg=test %}">{{ test }}</a></p>
-  {% endfor %}
-{% endblock content %}
+  {% block link %}
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/translate.css' %}">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">  
+  {% endblock %}
+    {% for test, v in types.items %}
+      <p><a href="{% url 'translate' my_arg=test %}">{{ v }}</a></p>
+    {% endfor %}
+{% endblock %}

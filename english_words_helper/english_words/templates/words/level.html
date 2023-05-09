@@ -1,8 +1,0 @@
-{% extends 'words/base.html' %}
-{% block content %}
-    <h1>Рівні:</h1>
-    {% for object in object_list %}
-    <p><a href="{% url 'topic' my_arg=object.id %}">{{ object }}</a></p>
-    {% endfor %}
-    <p><a href="{% url 'verb' %}">Irregular Verbs</a></p>
-{% endblock content %}

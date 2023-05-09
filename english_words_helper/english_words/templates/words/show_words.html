@@ -1,7 +1,12 @@
 {% extends 'words/base.html' %}
+
 {% block content %}
-  <h1>Ваші слова:</h1>
-  {% for word in user_words %}
-  <p>{{ word.english_word }} - {{ word.ukraine_word }}</p>
-  {% endfor %}
+  <div class="word-list">
+    {% for word in user_words %}
+      <div class="word">
+        <div class="word-english">{{ word.english_word }}</div>
+        <div class="word-ukrainian">{{ word.ukraine_word }}</div>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock content %}
