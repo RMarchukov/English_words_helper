@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.generic import ListView, FormView
 from .models import Words, Levels, Topics, IrregularVerbs, UserWords, UserTests
 from random import choice
@@ -6,7 +5,6 @@ from django.views import View
 from .forms import UserWordsForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import JsonResponse
 from django.shortcuts import render
 
 

@@ -5,4 +5,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('english_words.urls')),
     path('', include('users.urls')),
+    path('api/', include('telegram_api.urls')),
 ]
