@@ -13,6 +13,7 @@ __pycache__/
 english_words_helper/english_words/__pycache__/
 english_words_helper/english_words_helper/__pycache__/
 english_words_helper/telegram_api/__pycache__/
+english_words_helper/users/__pycache__/
 
 
 local_settings.py
