@@ -10,10 +10,10 @@ english_words_helper/english_words/__pycahche__
 *.pot
 *.pyc
 __pycache__/
-english_words/__pycache__/
-english_words_helper/english_words/__pycache__/models.cpython-311.pyc
+english_words_helper/english_words/__pycache__/
+english_words_helper/english_words_helper/__pycache__/
+english_words_helper/telegram_api/__pycache__/
 
-english_words_helper/__pycache__/settings.cpython-311.pyc
 
 local_settings.py
 db.sqlite3

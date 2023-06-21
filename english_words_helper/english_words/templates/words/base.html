@@ -25,9 +25,13 @@
    
     <div class="content">
       {% block content %}
-      <h1>Теми рівня</h1>
+      <h1>Рівні</h1>
       {% for object in levels %}
-      <h1><a href="{% url 'topic' my_arg=object.id %}">{{ object.name }}</a></h1>
+        {% if object.name == 'verbs' %}
+            <h1><a href="{% url 'verb' %}">{{ object.name }}</a></h1>
+        {% else %}
+            <h1><a href="{% url 'topic' my_arg=object.id %}">{{ object.name }}</a></h1>
+        {% endif %}
       {% endfor %}
       {% endblock content %}
     </div>
@@ -38,8 +42,8 @@
         <a href="{% url 'add_word' %}">Додати слово</a>
         <a href="{% url 'show_words' %}">Подивитися свої слова</a>
         <a href="{% url 'show_tests' %}">Подивитися результати тестів</a>
-        <a href="{% url 'base' %}">Перейти на головну сторінку</a>
         {% endif %}
+        <a href="{% url 'base' %}">Перейти на головну сторінку</a>
     </div>
   </div>
 </body>

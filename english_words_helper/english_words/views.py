@@ -9,7 +9,6 @@ from django.shortcuts import render
 
 
 class BaseView(View):
-
     def get(self, request):
         queryset = Levels.objects.all()
         context = {'levels': queryset}
