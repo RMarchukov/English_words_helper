@@ -1,9 +1,15 @@
 {% extends 'words/base.html' %}
 {% block content %}
-    <h2>Реєстрація</h2>
+<div class="centered-form">
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Зареєструватися</button>
+
+    {% for f in form %}
+    <p>{{ f }}</p>
+    <div class="form-error">{{ f.errors }}</div>
+    {% endfor %}
+
+    <button class="form-button" type="submit">Зареєструватися</button>
   </form>
+</div>
 {% endblock content %}

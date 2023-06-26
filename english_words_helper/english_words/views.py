@@ -139,8 +139,11 @@ class ShowTests(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         queryset = UserTests.objects.filter(user=self.request.user)
-        user_test = queryset[0]
-        return user_test
+        if queryset:
+            user_test = queryset[0]
+            return user_test
+        else:
+            return queryset
 
 
 def translate(request):
