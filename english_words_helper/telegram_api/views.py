@@ -1,5 +1,8 @@
 from rest_framework import generics
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.generics import get_object_or_404
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+
 from english_words import models
 from .serializers import SerTopics, SerLevels, SerWords, SerIrregularVerbs
 
@@ -17,6 +20,8 @@ class Levels(generics.ListAPIView):
 class Words(generics.ListAPIView):
     serializer_class = SerWords
     queryset = models.Words.objects.all()
+    permission_classes = (IsAuthenticated, )
+    # authentication_classes = (TokenAuthentication, )
 
 
 class DetailTopicsByLevel(generics.ListAPIView):

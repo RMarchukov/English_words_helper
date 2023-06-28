@@ -5,46 +5,72 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Words</title>
-    {% block link %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    {% endblock link %}
     <meta name="viewport" content="width=device-width">
 </head>
-
-
 <body>
-  <div class="header">
-    {% if user.is_authenticated %}
-      <p>Welcome, {{ user.username }}! <a href="{% url 'logout' %}">Вийти</a></p>
-    {% else %}
-      <p><a href="{% url 'login' %}">Увійти</a> або <a href="{% url 'register' %}">Зареєструватися</a></p>
-    {% endif %}
-  </div>
-  <div class="main">
-   
-    <div class="content">
-      {% block content %}
-      <h1>Рівні</h1>
-      {% for object in levels %}
-        {% if object.name == 'verbs' %}
-            <h1><a href="{% url 'verb' %}">{{ object.name }}</a></h1>
-        {% else %}
-            <h1><a href="{% url 'topic' my_arg=object.id %}">{{ object.name }}</a></h1>
-        {% endif %}
-      {% endfor %}
-      {% endblock content %}
-    </div>
+        <div class="header">
+            <p><a href="{% url 'base' %}">На головну</a></p>
+            {% if user.is_authenticated %}
+                <p>Welcome, {{ user.username }}! <a href="{% url 'logout_main' %}">Вийти</a></p>
+            {% else %}
+                <p><a href="{% url 'login_main' %}">Увійти</a> або <a href="{% url 'register' %}">Зареєструватися</a></p>
+            {% endif %}
+        </div>
+    <div class="container">
 
-    <div class="sidebar">
-        <a href="{% url 'types' %}">Перейти до тестів</a>
-        {% if user.is_authenticated %}
-        <a href="{% url 'add_word' %}">Додати слово</a>
-        <a href="{% url 'show_words' %}">Подивитися свої слова</a>
-        <a href="{% url 'show_tests' %}">Подивитися результати тестів</a>
-        {% endif %}
-        <a href="{% url 'base' %}">Перейти на головну сторінку</a>
+
+        <div class="content">
+            {% block content %}
+                <h1>You are welcome!!! Choose level, please!!!</h1>
+                    <div class="main-page">
+                        {% for level in levels %}
+                        <div class="level-block">
+                            <h1 class="level-heading">{{ level.name }}</h1>
+                            <div class="topics" style="display: none;">
+                                {% if level.name == 'ir.verbs' %}
+                                    <h1><a href="{% url 'verb' %}">ir.verbs</a></h1>
+                                {% elif level.name == 'A1' %}
+                                    {% for topic in topics1 %}
+                                        <h1><a href="{% url 'word' my_arg=topic.id %}">{{ topic.name }}</a></h1>
+                                    {% endfor %}
+                                {% elif level.name == 'A2' %}
+                                    {% for topic in topics2 %}
+                                        <h1><a href="{% url 'word' my_arg=topic.id %}">{{ topic.name }}</a></h1>
+                                    {% endfor %}
+                                {% elif level.name == 'B1' %}
+                                    {% for topic in topics3 %}
+                                        <h1><a href="{% url 'word' my_arg=topic.id %}">{{ topic.name }}</a></h1>
+                                    {% endfor %}
+                                {% elif level.name == 'B2' %}
+                                    {% for topic in topics4 %}
+                                        <h1><a href="{% url 'word' my_arg=topic.id %}">{{ topic.name }}</a></h1>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+            {% endblock content %}
+        </div>
+
+
+
+            <div class="sidebar">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'types' %}">Перейти до тестів</a>
+                        <a href="{% url 'add_word' %}">Додати слово</a>
+                        <a href="{% url 'show_words' %}">Подивитися свої слова</a>
+                        <a href="{% url 'show_tests' %}">Подивитися результати тестів</a>
+                    {% else %}
+                        <a href="{% url 'types' %}">Перейти до тестів</a>
+                        <a href="{% url 'login_main' %}">Додати слово</a>
+                        <a href="{% url 'login_main' %}">Подивитися свої слова</a>
+                        <a href="{% url 'login_main' %}">Подивитися результати тестів</a>
+                    {% endif %}
+            </div>
     </div>
-  </div>
+    <script src="{% static 'js/rotate.js' %}"></script>
 </body>
 </html>

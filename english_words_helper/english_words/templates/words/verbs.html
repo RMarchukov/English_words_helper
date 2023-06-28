@@ -1,6 +1,12 @@
 {% extends 'words/base.html' %}
 {% block content %}
-  {% for object in object_list %}
-  <p>{{ object.first_form }} - {{ object.second_form }} - {{ object.third_form }} - {{ object.translate }}</p>
-  {% endfor %}
+
+{% for object in object_list %}
+  <div class="verb-list">
+    <div class="verb">{{ object.first_form }}</div><p class="def">&#8212</p>
+    <div class="verb">{{ object.second_form }}</div><p class="def">&#8212</p>
+    <div class="verb">{{ object.third_form }}</div><p class="def">&#8212</p>
+    <div class="verb">{{ object.translate }}</div>
+  </div><hr>
+{% endfor %}
 {% endblock content %}

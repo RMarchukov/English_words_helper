@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 
@@ -9,4 +9,7 @@ urlpatterns = [
     path('words/', views.Words.as_view(), name='wordsAPI'),
     path('words/by-level/<str:level_name>/', views.DetailWordsByLevel.as_view(), name='detail_words_by_level'),
     path('words/by-topic/<str:topic_name>/', views.DetailWordsByTopic.as_view(), name='detail_words_by_topic'),
+    path('auth/', include('djoser.urls')),
+    path('auth-tok/', include('djoser.urls.authtoken')),
+    path('drf-auth/', include('rest_framework.urls')),
 ]

@@ -10,7 +10,7 @@ from django.contrib.auth.views import LoginView
 class RegisterView(FormView):
     template_name = 'users/register.html'
     form_class = RegisterUserForm
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('login_main')
 
     def form_valid(self, form):
         form.save()
@@ -42,4 +42,4 @@ class LoginView(FormView):
 class LogoutView(View):
     def get(self, request):
         logout(request)
-        return redirect('login')
+        return redirect('login_main')

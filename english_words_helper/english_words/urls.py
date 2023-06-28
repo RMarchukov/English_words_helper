@@ -14,4 +14,5 @@ urlpatterns = [
     path('show_tests/', views.ShowTests.as_view(), name='show_tests'),
     path('', views.BaseView.as_view(), name='base'),
     path('translate/', views.translate, name='types'),
+    path('token/', views.UserToken.as_view(), name='token'),
 ]

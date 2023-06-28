@@ -1,5 +1,5 @@
 {% extends 'words/base.html' %}
-
+{% load static %}
 {% block content %}
   <div class="word-list">
     {% for word in user_words %}
@@ -9,4 +9,5 @@
       </div>
     {% endfor %}
   </div>
+<script src="{% static 'js/script.js' %}"></script>
 {% endblock content %}

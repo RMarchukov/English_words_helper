@@ -1,4 +1,6 @@
 from django.views.generic import ListView, FormView
+from djoser.conf import User
+
 from .models import Words, Levels, Topics, IrregularVerbs, UserWords, UserTests
 from random import choice
 from django.views import View
@@ -6,18 +8,49 @@ from .forms import UserWordsForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
+from rest_framework.authtoken.models import Token
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class BaseView(View):
     def get(self, request):
-        queryset = Levels.objects.all()
-        context = {'levels': queryset}
+        levels = Levels.objects.all()
+        topics = Topics.objects.all()
+        topics1 = Topics.objects.filter(level__name='A1')
+        topics2 = Topics.objects.filter(level__name='A2')
+        topics3 = Topics.objects.filter(level__name='B1')
+        topics4 = Topics.objects.filter(level__name='B2')
+        context = {'levels': levels, 'topics': topics, 'topics1': topics1, 'topics2': topics2, 'topics3': topics3, 'topics4': topics4}
         return render(request, 'words/base.html', context)
-    
+
+# class BaseView(ListView):
+#     template_name = 'words/base.html'
+#     model = Topics
+#
+#     def get_queryset(self):
+#         queryset = super().get_queryset()
+#         my_arg = self.kwargs.get('my_arg', None)
+#         if my_arg:
+#             queryset = queryset.filter(topic_id=my_arg)
+#         return queryset
 
 # class Level(ListView):
 #     template_name = 'words/level.html'
 #     queryset = Levels.objects.all()
+
+
+class UserToken(View):
+    def get(self, request):
+        try:
+            token = Token.objects.get(user=self.request.user)
+            print(token.key)
+            context = {'token': token.key}
+        except ObjectDoesNotExist:
+            token = Token.objects.create(user=self.request.user)
+            print(token.key)
+            context = {'token': token.key}
+
+        return render(request, 'words/token.html', context)
 
 
 class Topic(ListView):
@@ -147,6 +180,7 @@ class ShowTests(LoginRequiredMixin, ListView):
 
 
 def translate(request):
-    me = {'test': 'Тести з украхнської', 'eng-test': 'Тести з англійської', 'choice': 'Вибиір варіанту', 'eng-choice': 'Вибиір варіанту з англійської'}
+    me = {'test': 'Тести з української', 'eng-test': 'Тести з англійської', 'choice': 'Вибиір варіанту',
+          'eng-choice': 'Вибиір варіанту з англійської'}
     context = {'types': me}
     return render(request, 'words/translate.html', context)
