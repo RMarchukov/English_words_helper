@@ -1,17 +1,18 @@
 {% extends 'words/base.html' %}
 {% block content %}
-  <div class="center-login">
+  <div class="login">
     <form method="post">
       {% csrf_token %}
       <div class="form-error">{{ form.non_field_errors }}</div>
 
       {% for f in form %}
-      <p><label class="form-label-login" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
+      <p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
       <div class="form-error">{{ f.errors }}</div>
       {% endfor %}
 
-      <button class="form-button-login" type="submit">Увійти</button>
+      <button class="form-button" type="submit">Увійти</button>
     </form>
-    <p>або <a href="{% url 'register' %}" class="register-link">Зареєструватися</a></p>
+    <p>або</p>
+    <p><a href="{% url 'register' %}" class="form-button">Зареєструватися</a></p>
   </div>
 {% endblock content %}

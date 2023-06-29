@@ -121,3 +121,33 @@ body {
     font-size: 20px;
     color: #555;
 }
+
+.login {
+    margin-top: 10%;
+    text-align: center;
+}
+
+.form-error {
+    color: red;
+}
+
+.form-label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.form-button:hover {
+  background-color: #45a049;
+}
