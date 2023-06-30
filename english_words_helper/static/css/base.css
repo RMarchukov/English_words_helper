@@ -248,3 +248,23 @@ body {
     width: 400px;
     height: 20px;
 }
+
+.results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    margin: 15px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px #ccc;
+    background-color: #f9f9f9;
+    transition: all 0.7s ease;
+}

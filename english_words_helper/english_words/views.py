@@ -34,35 +34,17 @@ class BaseView(View):
 #             queryset = queryset.filter(topic_id=my_arg)
 #         return queryset
 
-# class Level(ListView):
-#     template_name = 'words/level.html'
-#     queryset = Levels.objects.all()
-
 
 class UserToken(View):
     def get(self, request):
         try:
             token = Token.objects.get(user=self.request.user)
-            print(token.key)
             context = {'token': token.key}
         except ObjectDoesNotExist:
             token = Token.objects.create(user=self.request.user)
-            print(token.key)
             context = {'token': token.key}
 
         return render(request, 'words/token.html', context)
-
-
-class Topic(ListView):
-    template_name = 'words/topic.html'
-    model = Topics
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        my_arg = self.kwargs.get('my_arg', None)
-        if my_arg:
-            queryset = queryset.filter(level_id=my_arg)
-        return queryset
 
 
 class Word(ListView):
@@ -164,10 +146,8 @@ class ShowWords(LoginRequiredMixin, ListView):
         return UserWords.objects.filter(user=self.request.user)
 
 
-class ShowTests(LoginRequiredMixin, ListView):
-    template_name = 'words/show_tests.html'
+class ShowTests(LoginRequiredMixin, View):
     model = UserTests
-    context_object_name = 'user_tests'
     login_url = reverse_lazy('login')
 
     def get_queryset(self):
@@ -177,6 +157,44 @@ class ShowTests(LoginRequiredMixin, ListView):
             return user_test
         else:
             return queryset
+
+    # def get_user_test(self):
+    #     user_tests = UserTests.objects.filter(user=self.request.user)
+    #     if user_tests:
+    #         user_test = user_tests[0]
+    #         return user_test
+    #     else:
+    #         return user_tests
+
+    def get_cleverest(self):
+        all_tests = UserTests.objects.all()
+        max_kpd = 0
+        good_user = UserTests.objects.get(user=self.request.user)
+        for test in all_tests:
+            kpd = 100 / test.all_test * test.true_test
+            if kpd >= max_kpd:
+                max_kpd = kpd
+                good_user = test
+                good_user.max_kpd = int(max_kpd)
+        return good_user
+
+    def get_the_most_diligent(self):
+        all_tests = UserTests.objects.all()
+        max_tests = 0
+        best_user = UserTests.objects.get(user=self.request.user)
+        for test in all_tests:
+            if test.all_test >= max_tests:
+                max_tests = test.all_test
+                best_user = test
+        return best_user
+
+    def get(self, request):
+        user_result = self.get_queryset()
+        max_kpd = self.get_cleverest()
+        max_answers = self.get_the_most_diligent()
+        context = {'user_result': user_result, 'max_kpd': max_kpd, 'max_answers': max_answers}
+        print(context)
+        return render(request, 'words/show_tests.html', context)
 
 
 def translate(request):

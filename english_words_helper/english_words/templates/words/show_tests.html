@@ -1,6 +1,20 @@
 {% extends 'words/base.html' %}
 {% block content %}
-  <h3>Всього спроб: {{ user_tests.all_test }}</h3>
-  <h3>Правильних відповідей: {{ user_tests.true_test }}</h3>
-  <h3>Неправильних відповідей: {{ user_tests.false_test }}</h3>
+<h1>Результати:</h1>
+  <div class="results">
+    <div class="result">
+      <h3>Ваші відповіді: {{ user_result.all_test }}</h3>
+      <h3>Правильних відповідей: {{ user_result.true_test }}</h3>
+      <h3>Неправильних відповідей: {{ user_result.false_test }}</h3>
+    </div>
+    <div class="result">
+      <h3>Найбільша кількість правильних відповідей: {{ max_kpd.true_test }}</h3>
+      <h3>Відсоток правильних відповідей: {{ max_kpd.max_kpd }}%</h3>
+      <h3>Користувач: {{ max_kpd.user.username }}</h3>
+    </div>
+    <div class="result">
+      <h3>Найбільша кількість відповідей: {{ max_answers.all_test }}</h3>
+      <h3>Користувач: {{ max_answers.user.username }}</h3>
+    </div>
+  </div>
 {% endblock content %}

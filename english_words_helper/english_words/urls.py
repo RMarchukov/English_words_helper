@@ -3,8 +3,6 @@ from . import views
 
 
 urlpatterns = [
-    # path('level/', views.Level.as_view(), name='level'),
-    path('topic/<str:my_arg>/', views.Topic.as_view(), name='topic'),
     path('word/<str:my_arg>/', views.Word.as_view(), name='word'),
     path('irregularverb/', views.IrregularVerb.as_view(), name='verb'),
     path('translate/<str:my_arg>/', views.FromEnglish.as_view(), name='translate'),
