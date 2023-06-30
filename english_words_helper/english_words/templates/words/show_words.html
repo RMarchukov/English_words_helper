@@ -1,7 +1,7 @@
 {% extends 'words/base.html' %}
 {% load static %}
 {% block content %}
-  <div class="word-list">
+  <div class="words">
     {% for word in user_words %}
       <div class="word">
         <div class="word-english">{{ word.english_word }}</div>

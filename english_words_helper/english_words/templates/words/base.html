@@ -23,12 +23,12 @@
 
         <div class="content">
             {% block content %}
-                <h1>You are welcome!!! Choose level, please!!!</h1>
+                <h1>Оберіть рівень!</h1>
                     <div class="main-page">
                         {% for level in levels %}
-                        <div class="level-block">
-                            <h1 class="level-heading">{{ level.name }}</h1>
-                            <div class="topics" style="display: none;">
+                        <div class="main-styles">
+                            <h1 class="levels">{{ level.name }}</h1>
+                            <div class="topics">
                                 {% if level.name == 'ir.verbs' %}
                                     <h1><a href="{% url 'verb' %}">ir.verbs</a></h1>
                                 {% elif level.name == 'A1' %}

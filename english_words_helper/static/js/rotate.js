@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", function() {
-  var levelBlocks = document.querySelectorAll(".level-block");
+    var blocks = document.querySelectorAll(".main-styles");
 
-  levelBlocks.forEach(function(block) {
-    var levelHeading = block.querySelector(".level-heading");
-    var topics = block.querySelector(".topics");
+    blocks.forEach(function(block) {
+      var levels = block.querySelector(".levels");
+      var topics = block.querySelector(".topics");
 
-    levelHeading.addEventListener("click", function() {
-      topics.style.display = topics.style.display === "none" ? "block" : "none";
+      block.addEventListener("click", function() {
+          this.classList.toggle('transform');
+        });
     });
-  });
 });

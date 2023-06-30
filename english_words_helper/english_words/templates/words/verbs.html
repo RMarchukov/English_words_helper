@@ -1,12 +1,19 @@
 {% extends 'words/base.html' %}
-{% block content %}
 
-{% for object in object_list %}
-  <div class="verb-list">
-    <div class="verb">{{ object.first_form }}</div><p class="def">&#8212</p>
-    <div class="verb">{{ object.second_form }}</div><p class="def">&#8212</p>
-    <div class="verb">{{ object.third_form }}</div><p class="def">&#8212</p>
-    <div class="verb">{{ object.translate }}</div>
-  </div><hr>
-{% endfor %}
+{% block content %}
+    <h1>Форми неправильних дієслів:</h1>
+    <div class="menu-verbs">
+      <div class="verb">Перша:</div><p class="def">&#8212</p>
+      <div class="verb">Друга:</div><p class="def">&#8212</p>
+      <div class="verb">Третя:</div><p class="def">&#8212</p>
+      <div class="verb">Переклад:</div>
+    </div>
+  {% for object in object_list %}
+    <div class="verbs">
+      <div class="verb">{{ object.first_form }}</div><p class="def">&#8212</p>
+      <div class="verb">{{ object.second_form }}</div><p class="def">&#8212</p>
+      <div class="verb">{{ object.third_form }}</div><p class="def">&#8212</p>
+      <div class="verb">{{ object.translate }}</div>
+    </div><hr>
+  {% endfor %}
 {% endblock content %}
