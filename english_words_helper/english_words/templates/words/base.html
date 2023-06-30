@@ -33,19 +33,19 @@
                                     <h1><a href="{% url 'verb' %}">ir.verbs</a></h1>
                                 {% elif level.name == 'A1' %}
                                     {% for topic in topics1 %}
-                                        <h1><a href="{% url 'word' my_arg=topic.id %}">{{ topic.name }}</a></h1>
+                                        <h1><a href="{% url 'word' my_arg=topic.id %}">- {{ topic.name }}</a></h1>
                                     {% endfor %}
                                 {% elif level.name == 'A2' %}
                                     {% for topic in topics2 %}
-                                        <h1><a href="{% url 'word' my_arg=topic.id %}">{{ topic.name }}</a></h1>
+                                        <h1><a href="{% url 'word' my_arg=topic.id %}">- {{ topic.name }}</a></h1>
                                     {% endfor %}
                                 {% elif level.name == 'B1' %}
                                     {% for topic in topics3 %}
-                                        <h1><a href="{% url 'word' my_arg=topic.id %}">{{ topic.name }}</a></h1>
+                                        <h1><a href="{% url 'word' my_arg=topic.id %}">- {{ topic.name }}</a></h1>
                                     {% endfor %}
                                 {% elif level.name == 'B2' %}
                                     {% for topic in topics4 %}
-                                        <h1><a href="{% url 'word' my_arg=topic.id %}">{{ topic.name }}</a></h1>
+                                        <h1><a href="{% url 'word' my_arg=topic.id %}">- {{ topic.name }}</a></h1>
                                     {% endfor %}
                                 {% endif %}
                             </div>
