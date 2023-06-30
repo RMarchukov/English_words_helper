@@ -1,8 +1,12 @@
 {% extends 'words/base.html' %}
+
 {% block content %}
+ <div class="add-word">
   <form method="post">
     {% csrf_token %}
+    <div class="form-error">{{ form.non_field_errors }}</div>
     {{ form.as_p }}
-    <input type="submit" value="Додати">
-    </form>
+    <button class="form-button" type="submit">Додати слово</button>
+  </form>
+ </div>
 {% endblock content %}
