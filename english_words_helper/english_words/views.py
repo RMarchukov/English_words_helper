@@ -1,6 +1,4 @@
 from django.views.generic import ListView, FormView
-from djoser.conf import User
-
 from .models import Words, Levels, Topics, IrregularVerbs, UserWords, UserTests
 from random import choice
 from django.views import View
@@ -10,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from rest_framework.authtoken.models import Token
 from django.core.exceptions import ObjectDoesNotExist
+from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 
 
 class BaseView(View):
@@ -35,15 +34,24 @@ class BaseView(View):
 #         return queryset
 
 
-class UserToken(View):
+class UserToken(LoginRequiredMixin, View):
+    login_url = reverse_lazy('login_main')
+
     def get(self, request):
         try:
             token = Token.objects.get(user=self.request.user)
-            context = {'token': token.key}
         except ObjectDoesNotExist:
             token = Token.objects.create(user=self.request.user)
-            context = {'token': token.key}
-
+        main_token = RefreshToken.for_user(user=self.request.user)
+        access_token = str(main_token.access_token)
+        refresh_token = str(main_token)
+        access_l = []
+        refresh_l = []
+        for access in access_token:
+            access_l.append(access)
+        for refresh in refresh_token:
+            refresh_l.append(refresh)
+        context = {'access_token': access_l, 'refresh_token': refresh_l, 'token': token}
         return render(request, 'words/token.html', context)
 
 
@@ -125,7 +133,8 @@ class AddWord(LoginRequiredMixin, FormView):
     template_name = 'words/add_word.html'
     form_class = UserWordsForm
     success_url = reverse_lazy('show_words')
-    login_url = reverse_lazy('login')
+    login_url = reverse_lazy('login_main')
+    permission_denied_message = 'Треба войти'
 
     def form_valid(self, form):
         user_id = self.request.user.id
@@ -140,7 +149,7 @@ class ShowWords(LoginRequiredMixin, ListView):
     template_name = 'words/show_words.html'
     model = UserWords
     context_object_name = 'user_words'
-    login_url = reverse_lazy('login')
+    login_url = reverse_lazy('login_main')
 
     def get_queryset(self):
         return UserWords.objects.filter(user=self.request.user)
@@ -148,7 +157,7 @@ class ShowWords(LoginRequiredMixin, ListView):
 
 class ShowTests(LoginRequiredMixin, View):
     model = UserTests
-    login_url = reverse_lazy('login')
+    login_url = reverse_lazy('login_main')
 
     def get_queryset(self):
         queryset = UserTests.objects.filter(user=self.request.user)
@@ -193,7 +202,6 @@ class ShowTests(LoginRequiredMixin, View):
         max_kpd = self.get_cleverest()
         max_answers = self.get_the_most_diligent()
         context = {'user_result': user_result, 'max_kpd': max_kpd, 'max_answers': max_answers}
-        print(context)
         return render(request, 'words/show_tests.html', context)
 
 

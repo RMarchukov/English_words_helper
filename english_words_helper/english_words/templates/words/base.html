@@ -56,20 +56,13 @@
         </div>
 
 
-
-            <div class="sidebar">
-                    {% if user.is_authenticated %}
-                        <a href="{% url 'types' %}">Перейти до тестів</a>
-                        <a href="{% url 'add_word' %}">Додати слово</a>
-                        <a href="{% url 'show_words' %}">Подивитися свої слова</a>
-                        <a href="{% url 'show_tests' %}">Подивитися результати тестів</a>
-                    {% else %}
-                        <a href="{% url 'types' %}">Перейти до тестів</a>
-                        <a href="{% url 'login_main' %}">Додати слово</a>
-                        <a href="{% url 'login_main' %}">Подивитися свої слова</a>
-                        <a href="{% url 'login_main' %}">Подивитися результати тестів</a>
-                    {% endif %}
-            </div>
+        <div class="sidebar">
+            <a href="{% url 'types' %}">Перейти до тестів</a>
+            <a href="{% url 'add_word' %}">Додати слово</a>
+            <a href="{% url 'show_words' %}">Подивитися свої слова</a>
+            <a href="{% url 'show_tests' %}">Подивитися результати тестів</a>
+            <a href="{% url 'token' %}">Отримати токен для API</a>
+        </div>
     </div>
     <script src="{% static 'js/rotate.js' %}"></script>
 </body>

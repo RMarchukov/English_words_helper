@@ -1,59 +1,54 @@
-from rest_framework import generics
-from rest_framework.authentication import TokenAuthentication
+from rest_framework import generics, viewsets
 from rest_framework.generics import get_object_or_404
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
-
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated, IsAdminUser
 from english_words import models
-from .serializers import SerTopics, SerLevels, SerWords, SerIrregularVerbs
+from .serializers import SerTopics, SerLevels, SerWords, SerIrregularVerbs, SerUserWords
+from .permissions import IsAdminOrReadOnly
 
 
-class Topics(generics.ListAPIView):
+class TopicsSetView(viewsets.ModelViewSet):
     serializer_class = SerTopics
     queryset = models.Topics.objects.all()
+    permission_classes = (IsAdminOrReadOnly, )
 
 
-class Levels(generics.ListAPIView):
+class LevelsSetView(viewsets.ModelViewSet):
     serializer_class = SerLevels
     queryset = models.Levels.objects.all()
+    permission_classes = (IsAdminOrReadOnly, )
 
 
-class Words(generics.ListAPIView):
+class WordsSetView(viewsets.ModelViewSet):
     serializer_class = SerWords
     queryset = models.Words.objects.all()
-    permission_classes = (IsAuthenticated, )
-    # authentication_classes = (TokenAuthentication, )
+    permission_classes = (IsAdminOrReadOnly, )
+
+
+class VerbsSetView(viewsets.ModelViewSet):
+    serializer_class = SerIrregularVerbs
+    queryset = models.IrregularVerbs.objects.all()
+    permission_classes = (IsAdminOrReadOnly, )
 
 
 class DetailTopicsByLevel(generics.ListAPIView):
     serializer_class = SerTopics
 
     def get_queryset(self):
+        level_name = self.kwargs.get('level_name').upper()
         queryset = models.Topics.objects.all()
-        my_arg = self.kwargs.get('my_arg', None)
-        if my_arg == 'verbs':
-            level = get_object_or_404(models.Levels, name=my_arg)
-            if level:
-                queryset = queryset.filter(level=level)
+        level = get_object_or_404(models.Levels, name=level_name)
+        queryset = queryset.filter(level=level)
         return queryset
 
 
 class DetailWordsByLevel(generics.ListAPIView):
-    def get_serializer_class(self):
-        level_name = self.kwargs.get('level_name')
-        if level_name == 'verbs':
-            serializer_class = SerIrregularVerbs
-        else:
-            serializer_class = SerWords
-        return serializer_class
+    serializer_class = SerWords
 
     def get_queryset(self):
         level_name = self.kwargs.get('level_name').upper()
-        if level_name == 'VERBS':
-            queryset = models.IrregularVerbs.objects.all()
-        else:
-            queryset = models.Words.objects.all()
-            level = get_object_or_404(models.Levels, name=level_name)
-            queryset = queryset.filter(topic__level=level)
+        queryset = models.Words.objects.all()
+        level = get_object_or_404(models.Levels, name=level_name)
+        queryset = queryset.filter(topic__level=level)
         return queryset
 
 
@@ -67,3 +62,9 @@ class DetailWordsByTopic(generics.ListAPIView):
             topic = get_object_or_404(models.Topics, name=topic_name)
             queryset = queryset.filter(topic=topic)
         return queryset
+
+
+class UserWordsSetView(viewsets.ModelViewSet):
+    queryset = models.UserWords.objects.all()
+    serializer_class = SerUserWords
+    permission_classes = (IsAuthenticated, )

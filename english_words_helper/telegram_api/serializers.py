@@ -4,29 +4,37 @@ from rest_framework import serializers
 
 class SerTopics(serializers.ModelSerializer):
     level = serializers.StringRelatedField()
-    topic = serializers.CharField(max_length=64, source='name')
 
     class Meta:
         model = models.Topics
-        fields = ['topic', 'level']
+        fields = '__all__'
 
 
 class SerLevels(serializers.ModelSerializer):
     class Meta:
         model = models.Levels
-        fields = ['name', ]
+        fields = '__all__'
 
 
 class SerWords(serializers.ModelSerializer):
-    topic = serializers.StringRelatedField(source='topic.name')
-    level = serializers.StringRelatedField(source='topic.level')
+    topic = serializers.SlugRelatedField(slug_field='name', read_only=True)
+    topic_id = serializers.PrimaryKeyRelatedField(queryset=models.Topics.objects.all(), write_only=True, source='topic')
+    level = serializers.StringRelatedField(source='topic.level.name')
 
     class Meta:
         model = models.Words
-        exclude = ['id', ]
+        fields = ['id', 'level', 'topic', 'in_english', 'in_ukrainian', 'topic_id']
 
 
 class SerIrregularVerbs(serializers.ModelSerializer):
     class Meta:
         model = models.IrregularVerbs
-        exclude = ['id', ]
+        fields = '__all__'
+
+
+class SerUserWords(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+    class Meta:
+        model = models.UserWords
+        fields = '__all__'

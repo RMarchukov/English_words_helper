@@ -119,6 +119,12 @@ body {
     cursor: pointer;
 }
 
+.topics h1 a:hover {
+    text-decoration: none;
+    color: red;
+    cursor: pointer;
+}
+
 .words {
     display: flex;
     flex-wrap: wrap;
@@ -276,4 +282,19 @@ body {
     box-shadow: 2px 2px 2px #ccc;
     background-color: #f9f9f9;
     transition: all 0.7s ease;
+}
+
+.tokens {
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+}
+
+.api {
+    display: flex;
+    flex-direction: column;
+}
+.jwt {
+    display: flex;
+    flex-wrap: wrap;
 }

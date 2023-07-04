@@ -1,5 +1,35 @@
 {% extends 'words/base.html' %}
 
 {% block content %}
-<div class="token">{{ token }}</div>
+<div class="tokens">
+    <div class="api">
+        <div>Token: Headers: Authorization: Token "your token"</div><br>
+        <div>Token {{ token }}</div><hr>
+        <div>JWT Token: Headers: Authorization: JWT "your token"</div><br>
+        <div class="jwt">
+        {% for access in access_token %}
+            <div>{{ access }}</div>
+        {% endfor %}
+        </div><hr>
+        <div>JWT Refresh Token: Headers: Authorization: JWT "your token"</div><br>
+        <div class="jwt">
+        {% for refresh in refresh_token %}
+            <div>{{ refresh }}</div>
+        {% endfor %}
+        </div>
+    </div>
+    <div>
+        <ul>API endpoints:
+            <li>api/topics/ - усі теми</li>
+            <li>api/topics/level_name/ - теми за рівнями</li>
+            <li>api/levels/ - усі рівні</li>
+            <li>api/words/ - усі слова</li>
+            <li>api/words/by-level/level_name/ - слова за рівнями</li>
+            <li>api/words/by-topic/topic_name/ - слова за темами</li>
+            <li>api/drf-auth/ - вхід</li>
+            <li>api/auth/users/ - реэстрація</li>
+            <li>api/auth/users/me/ - інфо</li>
+        </ul>
+    </div>
+</div>
 {% endblock content %}
