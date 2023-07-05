@@ -1,0 +1,315 @@
+/* Общие стили */
+body {
+	margin: 0;
+	font-family: Arial, sans-serif;
+}
+
+/* Стили для контейнера */
+.container {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: space-evenly;
+	min-height: 90vh;
+	width: 100%;
+}
+
+/* Стили для шапки */
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: #333;
+	color: #fff;
+	height: 10vh;
+	padding: 0 50px;
+}
+
+.header a {
+	font-size: 18px;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 30px;
+	background-color: #444;
+	padding: 5px 30px;
+}
+
+.header a:hover {
+	background-color: #555;
+}
+
+/* Стили для контента */
+.content {
+	width: 80%;
+	background-image: url(/static/image/background.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	border-radius: 20px;
+}
+
+.content h1 {
+	text-align: center;
+	font-size: 24px;
+}
+
+@media (max-width: 820px)
+{
+/* Стили для основного контента */
+.main-page {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-height: 80vh;
+}
+}
+
+.main-styles {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	margin: 8px;
+	padding: 14px;
+	border: 1px solid #ccc;
+	border-radius: 18px;
+	box-shadow: 2px 2px 2px #ccc;
+	background-color: #f9f9f9;
+	opacity: 0.7;
+	transition: all 0.7s ease;
+	width: 15%;
+}
+
+.main-styles .word-english {
+	display: block;
+}
+
+.topics {
+	display: none;
+	font-size: 24px;
+}
+
+.main-styles.transform {
+	transform: rotateY(180deg);
+}
+
+.main-styles.transform .levels {
+	display: none;
+}
+
+.main-styles.transform .topics {
+	display: block;
+	transform: rotateY(180deg);
+}
+
+/* Стили для боковой панели */
+.sidebar {
+	width: 20%;
+	background-color: #f9f9f9;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	border-radius: 20px;
+	padding: 10px;
+	padding-top: 30px;
+}
+
+.sidebar a {
+	display: block;
+	font-size: 18px;
+	color: black;
+	text-decoration: none;
+	transition: all 0.3s ease;
+	border-radius: 10px;
+	padding: 6px 8px;
+}
+
+.sidebar a:hover {
+	color: #ffffff;
+	background-color: #333;
+	transform: scale(1.1);
+}
+
+.topics h1 a {
+	text-decoration: none;
+	color: black;
+	cursor: pointer;
+}
+
+.topics h1 a:hover {
+	text-decoration: none;
+	color: red;
+	cursor: pointer;
+}
+
+/* Стили для списка слов */
+.words {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+
+.word {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 15px;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	box-shadow: 2px 2px 2px #ccc;
+	background-color: #f9f9f9;
+	cursor: pointer;
+	transition: all 0.7s ease;
+	opacity: 0.9;
+	width: 20%;
+}
+
+.word .word-english {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.word .word-ukrainian {
+	display: none;
+	font-size: 24px;
+}
+
+.word.transform {
+	transform: rotateY(180deg);
+}
+
+.word.transform .word-english {
+	display: none;
+}
+
+.word.transform .word-ukrainian {
+	display: block;
+	transform: rotateY(180deg);
+}
+
+/* Стили для глаголов */
+.verbs {
+	display: flex;
+	align-items: baseline;
+}
+
+.menu-verbs {
+	display: flex;
+	align-items: baseline;
+	position: sticky;
+	top: 0;
+}
+
+.menu-verbs .verb {
+	margin-bottom: 50px;
+	background-color: #333;
+	color: #fff;
+}
+
+.verb {
+	margin: 15px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	box-shadow: 2px 2px 2px #ccc;
+	background-color: #f9f9f9;
+	width: 20%;
+	text-align: center;
+}
+
+/* Стили для форм регистрации и входа */
+.register {
+	margin-top: 10%;
+	text-align: center;
+}
+
+.register h1 {
+	color: #555;
+}
+
+.login {
+	margin-top: 10%;
+	text-align: center;
+}
+
+.login form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.login form button {
+	margin-top: 20px;
+}
+
+.form-error {
+	color: red;
+}
+
+.form-label {
+	font-weight: bold;
+	display: block;
+	margin-bottom: 5px;
+}
+
+.form-button {
+	display: inline-block;
+	padding: 10px 0;
+	background-color: #333;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+	border-radius: 4px;
+	text-decoration: none;
+	width: 408px;
+}
+
+.add-word .form-button {
+	width: 300px;
+	margin-top: 15px;
+}
+
+.form-button:hover {
+	background-color: #555;
+}
+
+.form-input-login,
+.form-input {
+	width: 400px;
+	height: 20px;
+}
+
+/* Стили для результатов */
+.results {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.result {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 60%;
+	margin: 15px;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	box-shadow: 2px 2px 2px #ccc;
+	background-color: #f9f9f9;
+	transition: all 0.7s ease;
+}
+
+/* Дополнительные стили */
+.tokens {
+	display: flex;
+	flex-direction: column;
+	margin: 50px;
+}
+
+.api {
+	display: flex;
+	flex-direction: column;
+}
+
+.jwt {
+	display: flex;
+	flex-wrap: wrap;
+}

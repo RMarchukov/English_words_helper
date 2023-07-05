@@ -48,10 +48,13 @@ body {
     font-size: 24px;
 }
 
+@media (min-width: 820px)
+{
 .main-page {
     display: flex;
     justify-content: space-evenly;
     min-height: 80vh;
+}
 }
 
 .main-styles {
@@ -173,7 +176,6 @@ body {
 
 .verbs {
     display: flex;
-    justify-content: space-evenly;
     align-items: baseline;
 }
 

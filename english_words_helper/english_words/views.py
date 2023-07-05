@@ -12,6 +12,7 @@ from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 
 
 class BaseView(View):
+
     def get(self, request):
         levels = Levels.objects.all()
         topics = Topics.objects.all()
@@ -21,17 +22,6 @@ class BaseView(View):
         topics4 = Topics.objects.filter(level__name='B2')
         context = {'levels': levels, 'topics': topics, 'topics1': topics1, 'topics2': topics2, 'topics3': topics3, 'topics4': topics4}
         return render(request, 'words/base.html', context)
-
-# class BaseView(ListView):
-#     template_name = 'words/base.html'
-#     model = Topics
-#
-#     def get_queryset(self):
-#         queryset = super().get_queryset()
-#         my_arg = self.kwargs.get('my_arg', None)
-#         if my_arg:
-#             queryset = queryset.filter(topic_id=my_arg)
-#         return queryset
 
 
 class UserToken(LoginRequiredMixin, View):
@@ -88,6 +78,7 @@ class FromEnglish(View):
 
 
 class CheckTranslationView(View):
+
     def post(self, request, my_arg):
         word_id = request.POST.get('word_id')
         translation = request.POST.get('translation')
