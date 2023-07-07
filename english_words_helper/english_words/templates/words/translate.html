@@ -1,6 +1,11 @@
 {% extends 'words/base.html' %}
   {% block content %}
+<h1>Оберіть вид тесту!</h1>
+  <div class="tests">
     {% for test, v in types.items %}
-      <p><a href="{% url 'translate' my_arg=test %}">{{ v }}</a></p>
+    <div class="test">
+      <a class="translate" href="{% url 'translate' my_arg=test %}">{{ v }}</a>
+    </div>
     {% endfor %}
+  </div>
   {% endblock %}

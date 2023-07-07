@@ -4,7 +4,11 @@
 <div class="tokens">
     <div class="api">
         <div>Token: Headers: Authorization: Token "your token"</div><br>
-        <div>Token {{ token }}</div><hr>
+        <div class="jwt">
+        {% for t in token %}
+            <div>{{ t }}</div>
+        {% endfor %}
+        </div><hr>
         <div>JWT Token: Headers: Authorization: JWT "your token"</div><br>
         <div class="jwt">
         {% for access in access_token %}
@@ -24,11 +28,17 @@
             <li>api/topics/level_name/ - теми за рівнями</li>
             <li>api/levels/ - усі рівні</li>
             <li>api/words/ - усі слова</li>
-            <li>api/words/by-level/level_name/ - слова за рівнями</li>
-            <li>api/words/by-topic/topic_name/ - слова за темами</li>
-            <li>api/drf-auth/ - вхід</li>
+            <li>api/verbs/ - усі діэслова</li>
+            <li>api/user-words/ - додані слова</li>
+            <li>api/words/level/level_name/ - слова за рівнями</li>
+            <li>api/words/topic/topic_name/ - слова за темами</li>
+            <li>api/drf-auth/login/ - вхід</li>
+            <li>api/drf-auth/logout/ - вихід</li>
             <li>api/auth/users/ - реэстрація</li>
             <li>api/auth/users/me/ - інфо</li>
+            <li>api/token/ - отримати JWT токени</li>
+            <li>api/token/refresh/ - оновити access JWT токен</li>
+            <li>api/token/verify/ - перевырка JWT токену</li>
         </ul>
     </div>
 </div>

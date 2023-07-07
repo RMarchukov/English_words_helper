@@ -41,7 +41,7 @@ class UserToken(LoginRequiredMixin, View):
             access_l.append(access)
         for refresh in refresh_token:
             refresh_l.append(refresh)
-        context = {'access_token': access_l, 'refresh_token': refresh_l, 'token': token}
+        context = {'access_token': access_l, 'refresh_token': refresh_l, 'token': token.key}
         return render(request, 'words/token.html', context)
 
 
@@ -197,7 +197,7 @@ class ShowTests(LoginRequiredMixin, View):
 
 
 def translate(request):
-    me = {'test': 'Тести з української', 'eng-test': 'Тести з англійської', 'choice': 'Вибиір варіанту',
-          'eng-choice': 'Вибиір варіанту з англійської'}
+    me = {'test': 'Письмовий переклад з української', 'eng-test': 'Письмовий переклад з англійської', 'choice': 'Тестовий переклад з української',
+          'eng-choice': 'Тестовий переклад з англійської'}
     context = {'types': me}
     return render(request, 'words/translate.html', context)

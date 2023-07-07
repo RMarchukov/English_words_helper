@@ -18,7 +18,7 @@ body {
 	background: #333;
 	color: #fff;
 	height: 10vh;
-	padding: 0px 150px;
+	padding: 0px 50px;
 }
 
 .header a {
@@ -48,20 +48,17 @@ body {
     font-size: 24px;
 }
 
-@media (min-width: 820px)
-{
 .main-page {
     display: flex;
     justify-content: space-evenly;
     min-height: 80vh;
-}
 }
 
 .main-styles {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin: 8px;
+    margin: 7px;
     padding: 14px;
     border: 1px solid #ccc;
     border-radius: 18px;
@@ -134,12 +131,18 @@ body {
     justify-content: space-evenly;
 }
 
-.word {
+.tests {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.word, .test {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 15px;
-    padding: 20px;
+    margin: 7px;
+    padding: 14px;
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: 2px 2px 2px #ccc;
@@ -153,7 +156,18 @@ body {
     }
 }
 
-.word-english {
+.test {
+    width: 46%;
+    height: 30vh;
+}
+
+.test a:hover {
+    color: red;
+}
+
+.word-english, .translate {
+    color: black;
+    text-decoration: none;
     font-size: 24px;
     font-weight: bold;
 }
@@ -216,12 +230,6 @@ body {
     text-align: center;
 }
 
-.login form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .login form button {
     margin-top: 20px;
 }
@@ -250,7 +258,7 @@ body {
 
 .add-word {
     .form-button {
-        width: 300px;
+        width: 35vh;
         margin-top: 15px;
     }
     text-align: center;
@@ -261,7 +269,7 @@ body {
     background-color: #555;
 }
 
-.form-input-login, .form-input {
+.form-input {
     width: 400px;
     height: 20px;
 }
