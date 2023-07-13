@@ -1,43 +1,65 @@
 {% extends 'words/base.html' %}
+{% load static %}
+
 {% block content %}
     {% if test == 'test' %}
-        <h1>Перекладіть слово "{{ word.in_ukrainian }}"</h1>
-        <form method="post" action="{% url 'check_translation' my_arg='test'%}">
-        {% csrf_token %}
-        <input type="hidden" name="word_id" value="{{ word.id }}">
-        <input type="text" name="translation">
-        <input type="submit" value="Перевірити">
-        </form>
+    <div class="answers">
+        <h1>Перекладіть слово - "{{ word.in_ukrainian }}"</h1>
+        <div class="answer">
+            <a href="{% url 'types' %}" class="round-button">Назад до тестів</a>
+            <form method="post" action="{% url 'check_translation' my_arg='test'%}">
+            {% csrf_token %}
+            <input type="hidden" name="word_id" value="{{ word.id }}">
+            <input type="text" name="translation" placeholder="Ваша вiдповiдь">
+            <button class="round-button" type="submit">Перевірити</button>
+            </form>
+        </div>
+    </div>
     {% elif test == 'choice' %}
+    <div class="answers">
         <h1>Перекладіть слово "{{ word.in_ukrainian }}"</h1>
-        <form method="post" action="{% url 'check_translation' my_arg='choice'%}">
-        {% csrf_token %}
-        <input type="hidden" name="word_id" value="{{ word.id }}">
-        <label><input type="radio" name="one" value="{{ one.in_english }}">1.{{ one.in_english }}</label>
-        <label><input type="radio" name="two" value="{{ two.in_english }}">2.{{ two.in_english }}</label>
-        <label><input type="radio" name="three" value="{{ word.in_english }}">3.{{ word.in_english }}</label>
-        <label><input type="radio" name="four" value="{{ four.in_english }}">4.{{ four.in_english }}</label><br><br>
-        <input type="submit" value="Перевірити">
-        </form>
+        <div class="answer-choice">
+            <a href="{% url 'types' %}" class="form-button">Назад до тестів</a>
+            <form method="post" action="{% url 'check_translation' my_arg='choice'%}">
+            {% csrf_token %}
+            <input type="hidden" name="word_id" value="{{ word.id }}">
+            <label><input type="radio" name="choice" value="{{ one.in_english }}">{{ one.in_english }}</label>
+            <label><input type="radio" name="choice" value="{{ two.in_english }}">{{ two.in_english }}</label>
+            <label><input type="radio" name="choice" value="{{ word.in_english }}">{{ word.in_english }}</label>
+            <label><input type="radio" name="choice" value="{{ four.in_english }}">{{ four.in_english }}</label>
+            <button class="form-button" type="submit">Перевірити</button>
+            </form>
+        </div>
+    </div>
     {% elif test == 'eng-test' %}
+    <div class="answers">
         <h1>Перекладіть слово "{{ word.in_english }}"</h1>
-        <form method="post" action="{% url 'check_translation' my_arg='eng-test'%}">
-        {% csrf_token %}
-        <input type="hidden" name="word_id" value="{{ word.id }}">
-        <input type="text" name="translation">
-        <input type="submit" value="Перевірити">
-        </form>
+        <div class="answer">
+            <a href="{% url 'types' %}" class="round-button">Назад до тестів</a>
+            <form method="post" action="{% url 'check_translation' my_arg='eng-test'%}">
+            {% csrf_token %}
+            <input type="hidden" name="word_id" value="{{ word.id }}">
+            <input type="text" name="translation" placeholder="Ваша вiдповiдь">
+            <button class="round-button" type="submit">Перевірити</button>
+            </form>
+        </div>
+    </div>
     {% elif test == 'eng-choice' %}
+    <div class="answers">
         <h1>Перекладіть слово "{{ word.in_english }}"</h1>
-        <form method="post" action="{% url 'check_translation' my_arg='eng-choice'%}">
-        {% csrf_token %}
-        <input type="hidden" name="word_id" value="{{ word.id }}">
-        <label><input type="radio" name="one" value="{{ one.in_ukrainian }}">1.{{ one.in_ukrainian }}</label>
-        <label><input type="radio" name="two" value="{{ two.in_ukrainian }}">2.{{ one.in_ukrainian }}</label>
-        <label><input type="radio" name="three" value="{{ word.in_ukrainian }}">3.{{ word.in_ukrainian }}</label>
-        <label><input type="radio" name="four" value="{{ four.in_ukrainian }}">4.{{ four.in_ukrainian }}</label><br><br>
-        <input type="submit" value="Перевірити">
-        </form>
+        <div class="answer-choice">
+            <a href="{% url 'types' %}" class="form-button">Назад до тестів</a>
+            <form method="post" action="{% url 'check_translation' my_arg='eng-choice'%}">
+            {% csrf_token %}
+            <input type="hidden" name="word_id" value="{{ word.id }}">
+            <label><input type="radio" name="choice" value="{{ one.in_ukrainian }}">{{ one.in_ukrainian }}</label>
+            <label><input type="radio" name="choice" value="{{ two.in_ukrainian }}">{{ one.in_ukrainian }}</label>
+            <label><input type="radio" name="choice" value="{{ word.in_ukrainian }}">{{ word.in_ukrainian }}</label>
+            <label><input type="radio" name="choice" value="{{ four.in_ukrainian }}">{{ four.in_ukrainian }}</label>
+            <button class="form-button" type="submit">Перевірити</button>
+            </form>
+        </div>
+    </div>
     {% endif %}
-        <p><a href="{% url 'types' %}">Назад до тестів</a></p>
+<script src="{% static 'js/mix.js' %}"></script>
 {% endblock content %}

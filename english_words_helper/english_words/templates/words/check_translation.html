@@ -1,27 +1,31 @@
 {% extends 'words/base.html' %}
 {% block content %}
+<div class="check">
   {% if answer == 'test' %}
-    <h1>{{ result }}</h1>
-    <p>Слово: {{ word.in_ukrainian }}</p>
-    <p>Переклад: {{ word.in_english }}</p>
-    <p>Ваша відповідь: {{ translation }}</p>
-    <p><a href="{% url 'translate' my_arg='test'%}">Наступне слово</a></p>
+    <h2>{{ result }}</h2>
+    <h2>Слово: {{ word.in_ukrainian }}</h2>
+    <h2>Переклад: {{ word.in_english }}</h2>
+    <h2>Ваша відповідь: {{ translation }}</h2>
+    <p><a href="{% url 'translate' my_arg='test'%}" class="form-button">Наступне слово</a></p>
   {% elif answer == 'choice' %}
-    <h1>{{ result }}</h1>
-    <p>Слово: {{ word.in_ukrainian }}</p>
-    <p>Переклад: {{ word.in_english }}</p>
-    <p><a href="{% url 'translate' my_arg='choice'%}">Наступне слово</a></p>
+    <h2>{{ result }}</h2>
+    <h2>Слово: {{ word.in_ukrainian }}</h2>
+    <h2>Переклад: {{ word.in_english }}</h2>
+    <h2>Ваша відповідь: {{ choice }}</h2>
+    <p><a href="{% url 'translate' my_arg='choice'%}" class="form-button">Наступне слово</a></p>
   {% elif answer == 'eng-test' %}
-    <h1>{{ result }}</h1>
-    <p>Слово: {{ word.in_english }}</p>
-    <p>Переклад: {{ word.in_ukrainian }}</p>
-    <p>Ваша відповідь: {{ translation }}</p>
-    <p><a href="{% url 'translate' my_arg='eng-test'%}">Наступне слово</a></p>
+    <h2>{{ result }}</h2>
+    <h2>Слово: {{ word.in_english }}</h2>
+    <h2>Переклад: {{ word.in_ukrainian }}</h2>
+    <h2>Ваша відповідь: {{ translation }}</h2>
+    <p><a href="{% url 'translate' my_arg='eng-test'%}" class="form-button">Наступне слово</a></p>
   {% elif answer == 'eng-choice' %}
-    <h1>{{ result }}</h1>
-    <p>Слово: {{ word.in_english }}</p>
-    <p>Переклад: {{ word.in_ukrainian }}</p>
-    <p><a href="{% url 'translate' my_arg='eng-choice'%}">Наступне слово</a></p>
+    <h2>{{ result }}</h2>
+    <h2>Слово: {{ word.in_english }}</h2>
+    <h2>Переклад: {{ word.in_ukrainian }}</h2>
+    <h2>Ваша відповідь: {{ choice }}</h2>
+    <p><a href="{% url 'translate' my_arg='eng-choice'%}" class="form-button">Наступне слово</a></p>
   {% endif %}
-    <p><a href="{% url 'types' %}">Назад до тестів</a></p>
+    <p><a href="{% url 'types' %}" class="form-button">Назад до тестів</a></p>
+</div>
 {% endblock content %}

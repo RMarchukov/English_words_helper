@@ -82,10 +82,7 @@ class CheckTranslationView(View):
     def post(self, request, my_arg):
         word_id = request.POST.get('word_id')
         translation = request.POST.get('translation')
-        one = request.POST.get('one')
-        two = request.POST.get('two')
-        three = request.POST.get('three')
-        four = request.POST.get('four')
+        choice = request.POST.get('choice')
 
         word = Words.objects.get(id=word_id)
 
@@ -97,13 +94,11 @@ class CheckTranslationView(View):
                 user_tests = UserTests(user=user, all_test=0, true_test=0, false_test=0)
             user_tests.all_test += 1
 
-        if one == word.in_english or two == word.in_english or three == word.in_english or four == word.in_english or \
-                translation == word.in_english:
+        if choice == word.in_english or translation == word.in_english:
             result = "Вірно!"
             if request.user.is_authenticated:
                 user_tests.true_test += 1
-        elif one == word.in_ukrainian or two == word.in_ukrainian or three == word.in_ukrainian or \
-                four == word.in_ukrainian or translation == word.in_ukrainian:
+        elif choice == word.in_ukrainian or translation == word.in_ukrainian:
             result = "Вірно!"
             if request.user.is_authenticated:
                 user_tests.true_test += 1
@@ -116,7 +111,7 @@ class CheckTranslationView(View):
             user_tests.save()
 
         my_arg = self.kwargs.get('my_arg', None)
-        context = {'result': result, 'word': word, 'translation': translation, 'answer': my_arg}
+        context = {'result': result, 'word': word, 'translation': translation, 'choice': choice, 'answer': my_arg}
         return render(request, 'words/check_translation.html', context)
 
 
