@@ -59,8 +59,7 @@ class DetailWordsByTopic(generics.ListAPIView):
         queryset = models.Words.objects.all()
         topic_name = self.kwargs.get('topic_name').lower()
         if topic_name:
-            topic = get_object_or_404(models.Topics, name=topic_name)
-            queryset = queryset.filter(topic=topic)
+            queryset = queryset.filter(topic__name=topic_name)
         return queryset
 
 

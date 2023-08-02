@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-*18_xmwd%wlbkoqrzr3-g=#*@8rkkbpft+wfo+@sjgw+6kcw+q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['RomaMarchukov.pythonanywhere.com', 'localhost', '127.0.0.1']
 
@@ -141,7 +141,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'],
                   'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-                  'PAGE_SIZE': 50,
+                  'PAGE_SIZE': 100,
+                  'DEFAULT_RENDERER_CLASSES': ['rest_framework.renderers.JSONRenderer', ],
                   'DEFAULT_AUTHENTICATION_CLASSES': [
                       'rest_framework.authentication.TokenAuthentication',
                       'rest_framework.authentication.BasicAuthentication',
