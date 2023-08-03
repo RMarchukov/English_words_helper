@@ -153,14 +153,6 @@ class ShowTests(LoginRequiredMixin, View):
         else:
             return queryset
 
-    # def get_user_test(self):
-    #     user_tests = UserTests.objects.filter(user=self.request.user)
-    #     if user_tests:
-    #         user_test = user_tests[0]
-    #         return user_test
-    #     else:
-    #         return user_tests
-
     def get_cleverest(self):
         all_tests = UserTests.objects.all()
         max_kpd = 0

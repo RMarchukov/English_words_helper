@@ -2,8 +2,9 @@ from rest_framework import generics, viewsets
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated, IsAdminUser
 from english_words import models
-from .serializers import SerTopics, SerLevels, SerWords, SerIrregularVerbs, SerUserWords
+from .serializers import SerTopics, SerLevels, SerWords, SerIrregularVerbs, SerUserWords, SerUserToken
 from .permissions import IsAdminOrReadOnly
+from rest_framework.authtoken.models import Token
 
 
 class TopicsSetView(viewsets.ModelViewSet):
@@ -28,6 +29,17 @@ class VerbsSetView(viewsets.ModelViewSet):
     serializer_class = SerIrregularVerbs
     queryset = models.IrregularVerbs.objects.all()
     permission_classes = (IsAdminOrReadOnly, )
+
+
+class GetUserToken(generics.ListAPIView):
+    serializer_class = SerUserToken
+    permission_classes = (IsAuthenticated, )
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = Token.objects.all()
+        queryset = queryset.filter(user_id=user.id)
+        return queryset
 
 
 class DetailTopicsByLevel(generics.ListAPIView):
@@ -63,7 +75,10 @@ class DetailWordsByTopic(generics.ListAPIView):
         return queryset
 
 
-class UserWordsSetView(viewsets.ModelViewSet):
+class GetAndPostUserWords(generics.ListCreateAPIView):
     queryset = models.UserWords.objects.all()
     serializer_class = SerUserWords
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated,)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

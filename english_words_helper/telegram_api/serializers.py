@@ -1,5 +1,6 @@
 from english_words import models
 from rest_framework import serializers
+from rest_framework.authtoken.models import Token
 
 
 class SerTopics(serializers.ModelSerializer):
@@ -38,3 +39,10 @@ class SerUserWords(serializers.ModelSerializer):
     class Meta:
         model = models.UserWords
         fields = '__all__'
+        read_only_fields = ('user',)
+
+
+class SerUserToken(serializers.ModelSerializer):
+    class Meta:
+        model = Token
+        fields = ['key']
