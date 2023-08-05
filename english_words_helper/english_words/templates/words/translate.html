@@ -1,5 +1,6 @@
 {% extends 'words/base.html' %}
-  {% block content %}
+
+{% block content %}
 <h1>Оберіть вид тесту!</h1>
   <div class="tests">
     {% for test, v in types.items %}
@@ -8,4 +9,4 @@
     </div>
     {% endfor %}
   </div>
-  {% endblock %}
+{% endblock %}

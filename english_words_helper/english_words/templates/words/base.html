@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width">
-    <title>Words</title>
+    <title>Learn Words</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}" media=all>
     <link rel="stylesheet" href="{% static 'css/styles_mobile.css' %}" media="(max-width: 1020px)">
@@ -63,6 +63,7 @@
             <a href="{% url 'show_words' %}">Подивитися свої слова</a>
             <a href="{% url 'show_tests' %}">Подивитися результати тестів</a>
             <a href="{% url 'token' %}">Отримати токен для API</a>
+            <a href="{% url 'api' %}">API endpoints</a>
         </div>
     </div>
     <script src="{% static 'js/rotate.js' %}"></script>

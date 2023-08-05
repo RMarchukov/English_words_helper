@@ -13,4 +13,5 @@ urlpatterns = [
     path('', views.BaseView.as_view(), name='base'),
     path('translate/', views.translate, name='types'),
     path('token/', views.UserToken.as_view(), name='token'),
+    path('api-info/', views.get_endpoints, name='api'),
 ]

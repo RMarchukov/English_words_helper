@@ -188,3 +188,7 @@ def translate(request):
           'eng-choice': 'Тестовий переклад з англійської'}
     context = {'types': me}
     return render(request, 'words/translate.html', context)
+
+
+def get_endpoints(request):
+    return render(request, 'words/api.html')
