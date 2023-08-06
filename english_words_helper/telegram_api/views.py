@@ -2,7 +2,7 @@ from rest_framework import generics, viewsets
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated, IsAdminUser
 from english_words import models
-from .serializers import SerTopics, SerLevels, SerWords, SerIrregularVerbs, SerUserWords, SerUserToken
+from .serializers import SerTopics, SerLevels, SerWords, SerIrregularVerbs, SerUserWords, SerUserToken, SerResults
 from .permissions import IsAdminOrReadOnly
 from rest_framework.authtoken.models import Token
 
@@ -82,3 +82,12 @@ class GetAndPostUserWords(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+
+class Results(generics.ListAPIView):
+    serializer_class = SerResults
+    permission_classes = (IsAuthenticated, )
+
+    def get_queryset(self):
+        queryset = models.UserTests.objects.filter(user=self.request.user)
+        return queryset

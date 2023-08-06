@@ -46,3 +46,9 @@ class SerUserToken(serializers.ModelSerializer):
     class Meta:
         model = Token
         fields = ['key']
+
+
+class SerResults(serializers.ModelSerializer):
+    class Meta:
+        model = models.UserTests
+        fields = ['all_test', 'true_test', 'false_test']
