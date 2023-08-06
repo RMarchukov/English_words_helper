@@ -1,7 +1,7 @@
 from django.urls import path, include
 from . import views
 from rest_framework import routers
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
+
 
 router = routers.DefaultRouter()
 router.register(r'words', views.WordsSetView, basename='words')
@@ -15,12 +15,9 @@ urlpatterns = [
     path('user-words/', views.GetAndPostUserWords.as_view()),
     path('words/level/<str:level_name>/', views.DetailWordsByLevel.as_view()),
     path('words/topic/<str:topic_name>/', views.DetailWordsByTopic.as_view()),
-    path('auth/', include('djoser.urls')),
-    path('auth-tok/', include('djoser.urls.authtoken')),
-    path('drf-auth/', include('rest_framework.urls')),
-    path('token/', TokenObtainPairView.as_view()),
-    path('token/refresh/', TokenRefreshView.as_view()),
-    path('token/verify/', TokenVerifyView.as_view()),
-    path('main-token/', views.GetUserToken.as_view()),
     path('results/', views.Results.as_view()),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.authtoken')),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.jwt')),
 ]
